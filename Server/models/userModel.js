@@ -16,24 +16,24 @@ const userSchema = new mongoose.Schema({
   },
   verifyOtp: {
     type: String,
-    default : ''
+    default: "",
   },
   verifyOtpExpireAt: {
     type: Date,
-    default : 0
+    default: null,
   },
   isAccountVerified: {
     type: Boolean,
-    default: false
+    default: false,
   },
   resetOtp: {
     type: String,
-    default:''
+    default: "",
   },
   resetOtpExpireAt: {
-    type: Number,
-    default:0
+    type: Date,
+    default: null,
   },
-}, { timestamps: true }); // Adds createdAt and updatedAt fields automatically
+}, { timestamps: true });
 
 export default mongoose.model("User", userSchema);

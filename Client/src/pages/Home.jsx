@@ -5,9 +5,13 @@ import { assets } from '../assets/assets';
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-center bg-cover" 
-         style={{ backgroundImage: `url('${assets.bg_img}')` }}>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-center bg-cover"
+      style={{ backgroundImage: `url('${assets.bg_img}')` }}
+    >
+      {/* Navbar visible only on Home */}
       <Navbar />
+
       <Header />
     </div>
   );

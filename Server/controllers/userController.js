@@ -2,12 +2,19 @@ import User from "../models/userModel.js";
 
 export const getUserData = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const userId = req.userId; // <-- comes from middleware, not request body
 
-    const user = await User.findById(userId);
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized",
+      });
+    }
+
+    const user = await User.findById(userId).select("name isAccountVerified");
 
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         success: false,
         message: "User not found",
       });
@@ -15,13 +22,10 @@ export const getUserData = async (req, res) => {
 
     return res.json({
       success: true,
-      userData: {
-        name: user.name,
-        isAccountVerified: user.isAccountVerified,
-      },
+      userData: user,
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       success: false,
       message: error.message,
     });
